@@ -42,7 +42,7 @@ readRDS = robjects.r['readRDS']
 ## L2 data 
     L2file = 'OPE_2011-2020_co2_120m.rds'
 ## NRT growing data file
-    NRTfile = 'C:/Users/aresovsk/ICOS_data/ICOS_NRT_growing_20200928/ICOS_ATC_NRT_OPE_2020-06-01_2020-09-27_120.0_CO2.xlsx'
+    NRTfile = 'ICOS_ATC_NRT_OPE_2020-06-01_2020-09-27_120.0_CO2.xlsx'
 
 ## 1. Read in historic data   
     hist_co2 = readRDS(histfile)
