@@ -38,9 +38,9 @@ readRDS = robjects.r['readRDS']
 
 #######################################################################################################
 ## Historic data file (example: OPE 120m co2 for 2011 to 2019).
-    histfile = 'C:/Users/aresovsk/ICOS_data/hourly/OPE_2011-2019_co2_120m.rds'
+    histfile = 'OPE_2011-2019_co2_120m.rds'
 ## L2 data 
-    L2file = 'C:/Users/aresovsk/ICOS_data/hourly/OPE_2011-2020_co2_120m.rds'
+    L2file = 'OPE_2011-2020_co2_120m.rds'
 ## NRT growing data file
     NRTfile = 'C:/Users/aresovsk/ICOS_data/ICOS_NRT_growing_20200928/ICOS_ATC_NRT_OPE_2020-06-01_2020-09-27_120.0_CO2.xlsx'
 
