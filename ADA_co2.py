@@ -65,18 +65,26 @@ readRDS = robjects.r['readRDS']
   
   
  ## 3. Concatenate
-    df_co2 = [L2_co2, NRT_co2]
+    df_co2 = [hist_co2, NRT_co2]
     df_co2 = pd.concat(df_co2) 
     df_co2 = df_co2.reset_index()
-  # Fix missing dates
+
+  # Fill any missing dates with NaN's
     length = len(df_co2) - 1
-    hourly = pd.date_range(df_co2.sampling_datetime[0], df_co2.sampling_datetime[length], freq='H', tz='GMT')
-    s = pd.Series(data=df_co2.concentration.values, index=df_co2['sampling_datetime'])
-    s.index = pd.DatetimeIndex(s.index)
-    s = s.reindex(hourly, fill_value='NaN')
+    hourly = pd.date_range(df_co2.sampling_datetime[0], 
+                           df_co2.sampling_datetime[length], freq='H', tz='GMT')
+    s = hourly.to_frame(index=False, name='sampling_datetime')
+    s['concentration'] = ""
+    for row in s.itertuples(): 
+        if any((s.sampling_datetime.iat[row.Index] == df_co2['sampling_datetime']).tolist()):
+            t = (s.sampling_datetime.iat[row.Index] == df_co2['sampling_datetime']).tolist()
+            u = list(compress(range(len(t)), t))
+            s.concentration.iat[row.Index] = df_co2.loc[u, 'concentration'].values[0]
+        else:
+            s.concentration.iat[row.Index] = 'NaN'
+
     df_co2 = pd.DataFrame(s)
-    df_co2.reset_index(level=0, inplace=True)
-    df_co2.columns = ['sampling_datetime','concentration']
+    
   # Keep only afternoon values (if non-mountain site)
     df_co2 = df_co2[(df_co2.sampling_datetime.dt.hour >= 12) & (df_co2.sampling_datetime.dt.hour <= 17)]
   # Keep only nighttime values (if mountain site)
