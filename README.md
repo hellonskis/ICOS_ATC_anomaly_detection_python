@@ -1,4 +1,6 @@
 ICOS_ATC_anomaly_detection
+![image](https://user-images.githubusercontent.com/45566769/112658884-23907980-8e54-11eb-8560-f9b540ca1043.png)
+
 
 The file ADA_co2.py can be used for extracting synoptic scale and seasonal anomalies from ICOS CO2 time series. Data from the OPE station are provided, but 
 any ICOS station can be used if the user has downloaded the historical data from the ICOS carbon portal and the NRT growing data for the past year. The code will 
